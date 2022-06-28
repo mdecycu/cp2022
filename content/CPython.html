@@ -2,6 +2,7 @@
         <head>
         <title>cp2022</title>
         <meta charset="utf-8">
+<meta property="head" content="H1">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900" rel="stylesheet">
         <link rel="stylesheet" href="./../cmsimde/static/chimper/fonts/icomoon/style.css">
@@ -94,6 +95,7 @@ img.add_border {
 </head>
 <body>
 <div class='container-fluid'><nav>
+        
     <div class="site-wrap">
 
     <div class="site-mobile-menu">
@@ -139,4 +141,85 @@ img.add_border {
           </div>
           
         </header>
-    </nav><section><h1>Site Map</h1><div id="tipue_search_content"></div><ul><li><a href='About.html'>About</a><li><a href='Brython.html'>Brython</a><li><a href='CPython.html'>CPython</a><ul><li><a href='CAD.html'>CAD</a><ul><li><a href='Python for SW.html'>Python for SW</a><li><a href='Python for INV.html'>Python for INV</a><li><a href='Python for NX.html'>Python for NX</a></li></ul><li><a href='CAE.html'>CAE</a><li><a href='MS Graph.html'>MS Graph</a></li></ul></section></div></body></html>
+    <div id="tipue_search_content">Brython << <a href='Brython.html'>Previous</a> <a href='CAD.html'>Next</a> >> CAD<br /><h1>CPython</h1>
+<p>比對兩份資料, 列出差異:</p>
+<p style="padding-left: 30px;">數列應用</p>
+<p style="padding-left: 30px;">for 重複迴圈</p>
+<p style="padding-left: 30px;">以 utf-8 編碼讀出檔案內容</p>
+<p style="padding-left: 30px;">splitlines() 函式逐行將檔案內容放入數列</p>
+<p style="padding-left: 30px;">if 判斷式應用</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># 兩份資料所在目錄字串
+studlist_path = "Y:/studlist/2022spring/"
+score_path = "Y:/score/2022/spring/"
+# score 區檔案套稿字串
+score_file_temp = "_stud_list.txt"
+# 班級代號數列
+classes = ["1a", "2a", "2b", "5j"]
+
+# 利用 for 迴圈, 逐班進行處理
+for i in classes:
+    # read data from studlist
+    # 以 utf-8 編碼開啟檔案
+    with open(studlist_path + i + ".txt", encoding="utf-8") as f:
+        studlist_data = f.read().splitlines()
+    #print(studlist_data)
+    with open(score_path + i + "/" + i + score_file_temp, encoding="utf-8") as f:
+        score_list_data = f.read().splitlines()
+    #print(score_list_data)
+    for i in studlist_data:
+        stud_num = i.split("\t")[0]
+        #print(stud_num)
+        # 列出已經不在評分名單中的學號
+        if stud_num not in score_list_data:
+            print(stud_num)</pre>
+<br />Brython << <a href='Brython.html'>Previous</a> <a href='CAD.html'>Next</a> >> CAD</div>
+        
+    <!-- footer -->
+      <div class="container">
+        <div class="row pt-3 mx-auto">
+            <p>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </p>
+        </div>
+      </div>
+    <!-- for footer -->
+    
+        </div> <!-- for site wrap -->
+            <!-- <script src="../cmsimde/static/chimper/js/jquery-3.3.1.min.js"></script> -->
+            <script src="../cmsimde/static/chimper/js/jquery-migrate-3.0.1.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/jquery-ui.js"></script>
+            <script src="../cmsimde/static/chimper/js/popper.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/bootstrap.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/owl.carousel.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/jquery.stellar.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/jquery.countdown.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/jquery.magnific-popup.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/bootstrap-datepicker.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/aos.js"></script>
+            <!--
+            <script src="../cmsimde/static/chimper/js/typed.js"></script>
+                    <script>
+                    var typed = new Typed('.typed-words', {
+                    strings: ["Web Apps"," WordPress"," Mobile Apps"],
+                    typeSpeed: 80,
+                    backSpeed: 80,
+                    backDelay: 4000,
+                    startDelay: 1000,
+                    loop: true,
+                    showCursor: true
+                    });
+                    </script>
+            -->
+            <script src="../cmsimde/static/chimper/js/main.js"></script>
+        
+<!-- 啟用 LaTeX equations 編輯 -->
+  <!-- <script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\(', '\)']]}
+  };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>-->
+    </body></html>
+        

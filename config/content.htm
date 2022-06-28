@@ -1,4 +1,5 @@
 <h1>About</h1>
+<h4>2022 Fall</h4>
 <p>Introduction to Computer Programming (計算機程式)</p><h1>Brython</h1>
 <p><a href="https://en.wikipedia.org/wiki/Flag_of_the_Republic_of_China#Construction_details">ROC 國旗規格</a> <a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%9B%BD%E6%97%97#%E8%A7%84%E6%A0%BC">PROC 國旗規格</a> <a href="https://en.wikipedia.org/wiki/Flag_of_the_United_States#Specifications">USA 國旗規格</a></p>
 <p><a href="https://gist.github.com/mdecourse/05930b1775b77293523b59b1bbb43e57">Gist Brython scripts</a></p>
@@ -448,3 +449,339 @@ doc["auto_tetris"].bind("click", auto_tetris.do)
 ################################## auto tetris end
 </script>
 </p>
+<h1>CPython</h1>
+<p>比對兩份資料, 列出差異:</p>
+<p style="padding-left: 30px;">數列應用</p>
+<p style="padding-left: 30px;">for 重複迴圈</p>
+<p style="padding-left: 30px;">以 utf-8 編碼讀出檔案內容</p>
+<p style="padding-left: 30px;">splitlines() 函式逐行將檔案內容放入數列</p>
+<p style="padding-left: 30px;">if 判斷式應用</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># 兩份資料所在目錄字串
+studlist_path = "Y:/studlist/2022spring/"
+score_path = "Y:/score/2022/spring/"
+# score 區檔案套稿字串
+score_file_temp = "_stud_list.txt"
+# 班級代號數列
+classes = ["1a", "2a", "2b", "5j"]
+
+# 利用 for 迴圈, 逐班進行處理
+for i in classes:
+    # read data from studlist
+    # 以 utf-8 編碼開啟檔案
+    with open(studlist_path + i + ".txt", encoding="utf-8") as f:
+        studlist_data = f.read().splitlines()
+    #print(studlist_data)
+    with open(score_path + i + "/" + i + score_file_temp, encoding="utf-8") as f:
+        score_list_data = f.read().splitlines()
+    #print(score_list_data)
+    for i in studlist_data:
+        stud_num = i.split("\t")[0]
+        #print(stud_num)
+        # 列出已經不在評分名單中的學號
+        if stud_num not in score_list_data:
+            print(stud_num)</pre>
+<h2>CAD</h2>
+<p>SolidWorks: <a href="https://www.solidworks.com/">https://www.solidworks.com/</a> </p>
+<p>AutoDesk Inventor: <a href="https://www.autodesk.com/products/inventor">https://www.autodesk.com/products/inventor</a> </p>
+<p>Siemens NX: <a href="https://www.plm.automation.siemens.com/global/en/products/nx/">https://www.plm.automation.siemens.com/global/en/products/nx/</a> </p>
+<p>PTC Onshape: <a href="https://www.ptc.com/en/products/onshape">https://www.ptc.com/en/products/onshape</a> </p>
+<p>Solvespace: <a href="https://solvespace.com">https://solvespace.com</a> </p>
+<p style="padding-left: 30px;"><a href="https://github.com/solvespace/solvespace">https://github.com/solvespace/solvespace</a> </p><h3>Python for SW</h3>
+<p><a href="http://wcm.cycu.org:88/github/cad2020/content/HW1_SW.html">http://wcm.cycu.org:88/github/cad2020/content/HW1_SW.html</a> </p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import pythoncom
+import win32com.client
+import win32api
+import os
+ 
+os.system("taskkill /IM sldworks.exe /F")
+os.system("taskkill /IM sldworks_fs.exe /F")
+ 
+'''
+About DispatchEx and Dispatch Methods:
+https://stackoverflow.com/questions/18648933/using-pywin32-what-is-the-difference-between-dispatch-and-dispatchex
+Source code:
+http://pywin32.hg.sourceforge.net/hgweb/pywin32/pywin32/file/0db1b26904d5/com/win32com/src/PyIDispatch.cpp
+Doc:
+https://docs.microsoft.com/en-us/dotnet/standard/native-interop/com-callable-wrapper
+ 
+IDispatch: Provides a mechanism for late binding to type.
+IDispatchEx:
+    Interface supplied by the runtime if the class implements IExpando. The IDispatchEx interface is an extension of the IDispatch interface that, unlike IDispatch, enables enumeration, addition, deletion, and case-sensitive calling of members.
+'''
+app = win32com.client.DispatchEx("SldWorks.Application")
+#app=win32com.client.Dispatch("SldWorks.Application")
+ 
+# define var to convert variables
+def var(type, value):
+    # type needs to be string
+    # use builtin getattr() to return pythoncom.type
+    pytype = getattr(pythoncom, type)
+    return win32com.client.VARIANT(pytype, value)
+ 
+# for two-type variable convert
+# is there any three-type variant?
+def var2(type1, type2, value):
+    pytype1 = getattr(pythoncom, type1)
+    pytype2 = getattr(pythoncom, type2)
+    return win32com.client.VARIANT(pytype1|pytype2, value)
+     
+def part(app, fileName, sketchName, dimName, newDim, newFileName):
+    arg1 = var("VT_I4", 1)
+    # GetMassProperties( ((3, 1), (16387, 3)))
+    #arg1 = win32com.client.VARIANT(pythoncom.VT_I4, 1)
+    arg2 = var("VT_I4", -1)
+ 
+    # 0. need the most important obj app
+    #app=win32com.client.Dispatch("SldWorks.Application")
+    # use relative directory to open part
+    # 1. open part file, need the path of the part file (need the file name)
+    #doc=app.OpenDoc(".\\block2.SLDPRT", 1)
+    doc=app.OpenDoc(os.path.join(os.getcwd(), fileName), 1)
+    # save part as binary stl
+    # can we save part as ASCII stl as well?
+    #doc.SaveAs2(".\\block2.stl", 0, True, False)
+    # the parameter VARIANT list for SelectByID2
+    # can we automate the VARIANT conversion?
+    # 2. use the sketch to select the SKETCH (need the sketch name)
+    #SelectByID2((8, 1), (8, 1), (5, 1), (5, 1), (5, 1), (11, 1), (3, 1), (9, 1), (3, 1))
+    #arg3 = var("VT_BSTR", "Sketch1")
+    arg3 = var("VT_BSTR", sketchName)
+    arg4 = var("VT_BSTR", "SKETCH")
+    arg5 = var("VT_R8", 0)
+    arg6 = var("VT_R8", 0)
+    arg7 = var("VT_R8", 0)
+    arg8 = var("VT_BOOL", False)
+    arg9 = var("VT_I4", 0)
+    arg10 = var("VT_DISPATCH", None)
+    arg11 = var("VT_I4", 0)
+    # select Sketch1 first
+    status = doc.Extension.SelectByID2(arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11)
+    # select DIMENSION to to modify
+    # 3. use the dimension name @ sketch name @ part file name
+    # to select the DIMENSION to modify
+    #arg12 = var("VT_BSTR", "Width@Sketch1@block2.SLDPRT")
+    arg12 = var("VT_BSTR", dimName+"@"+sketchName+"@"+fileName)
+    arg13 = var("VT_BSTR", "DIMENSION")
+    status = doc.Extension.SelectByID2(arg12, arg13, arg5, arg6, arg7, arg8, arg9, arg10, arg11)
+    #Dim swDimension As SldWorks.Dimension
+    # 4. to bring out the parameter to modify, need the dimension name and 
+    # sketch name
+    #swDimension = doc.Parameter("Width@Sketch1")
+    swDimension = doc.Parameter(dimName+"@"+sketchName)
+    # the dimension unit is in meter
+    # 5. need the new value of the parameter
+    #swDimension.SystemValue = 0.50
+    swDimension.SystemValue = newDim
+    # 6. do the final house keeping process, clear selection and rebuild the part
+    sel = doc.ClearSelection2 
+    sel = True
+    status = doc.EditRebuild()
+    arg31 = var("VT_I4", 1)
+    arg32 = var2("VT_I4", "VT_BYREF", 3)
+    # 7. get the volume of the new part
+    volumn = doc.Extension.GetMassProperties(arg31, arg32)
+    #print(volumn[3]*1E9, "mm*3")
+    # 8. save the new part (need the new part file name)
+    #doc.SaveAs2(".\\block3.SLDPRT", 0, True, False)
+    doc.SaveAs2(os.path.join(os.getcwd(), "html/" + newFileName + ".SLDPRT"), 0, True, False)
+    # save jpg of part
+    doc.EditRebuild()
+    arg33 = var("VT_BSTR", "Isometric")
+    doc.ShowNamedView(arg33)
+    doc.ViewZoomtofit2()
+    doc.SaveAs3(os.path.join(os.getcwd(), "html/" + newFileName + ".jpg"), 0, 0)
+    # mm*3
+    return str(round(volumn[3]*1E9, 3)) + " mm*3"
+html = "以下零件採 SolidWorks 2017 SP 2.0 教育版繪製:&lt;br /&gt;&lt;br /&gt;&lt;table border='1' cellpadding='5'&gt;&lt;tr&gt;&lt;th&gt;Number&lt;/th&gt;&lt;th&gt;Part&lt;/th&gt;&lt;th&gt;Jpg&lt;/th&gt;&lt;th&gt;Width&lt;/th&gt;&lt;th&gt;Volume&lt;/th&gt;&lt;/tr&gt;"
+index = 0
+for i in range(1, 11):
+    dim = i*0.002
+    blockVolume = part(app, "31_step.SLDPRT", "Sketch1", "Width", dim, "31_" + str(i))
+    print("31_" + str(i) + ".SLDPRT, dim= " + str(round(dim, 3)) +", volume= " + blockVolume)
+    index += 1
+    newFileName = "31_" + str(i)
+    html += '''&lt;tr&gt;
+    &lt;td&gt;''' + str(index) +'''&lt;/td&gt;
+    &lt;td&gt;&lt;a href="./../downloads/sw_macro/html/''' + newFileName + '''.SLDPRT"&gt;''' + newFileName + '''.SLDPRT&lt;/a&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;img width="300" src="./../downloads/sw_macro/html/''' + newFileName + '''.jpg"&gt;&lt;/img&gt;&lt;/td&gt;
+    &lt;td&gt;''' + str(round(dim*1000, 2)) + ''' mm &lt;/td&gt;
+    &lt;td&gt;''' + blockVolume + '''&lt;/td&gt;
+    &lt;/tr&gt;
+    '''
+html += "&lt;/table&gt;"
+# save part.html
+with open("./html/part.html", "w", encoding="utf-8") as f:
+     f.write(html)
+      
+'''
+for assembly
+        swModelDocExt.SelectByID2("", "EDGE", -0.439825991092107, 7.07350481263802E-02, 0.40982045578545, true, 2, null, 0);
+        swModelDocExt.SelectByID2("", "EDGE", -0.219003008311574, 0.073085842475507, 0.549481823985616, true, 4, null, 0);
+        swModelDocExt.SelectByID2("Part-3@AssemModel", "COMPONENT", 0, 0, 0, true, 1, null, 0);
+        swFeature = (Feature)swFeatureManager.FeatureLinearPattern2(3, 40 / 1000, 0, 0, false, true, "NULL", "NULL", false);
+        assemblyModel.ClearSelection2(true);
+'''
+os.system("taskkill /IM sldworks.exe /F")
+os.system("taskkill /IM sldworks_fs.exe /F")
+# now the SolidWorks is embedding</pre>
+<p></p><h3>Python for INV</h3>
+<p>針對 HW1 使用 AutoDesk Inventor 2019 教育版繪零件圖者, 可以利用下列 Python 程式修改零件參數, 取零件影像圖並計算零件體積:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import pythoncom
+import win32com.client
+import win32api
+import os
+ 
+# Open Inventor
+invApp = win32com.client.Dispatch("Inventor.Application")
+#print(invApp)
+invApp.Visible = True
+ 
+invApp.SilentOperation = True
+ 
+# Set location of assembly
+partName = 'C:/tmp/Part1.ipt'
+ 
+# Open the model
+oDoc = invApp.Documents.Open(partName)
+# use UserParameters to access the user parameters
+#oUserParams = oDoc.ComponentDefinition.Parameters.UserParameters
+#oNewParam = oUserParams.AddByExpression("x", "9", "mm")
+# use Item() to get the model parameter named "d0"
+d0 = oDoc.ComponentDefinition.Parameters.Item("d0")
+# Expression can add dimension unit
+#d0.Expression = "2 cm"
+# Value use the default system unit: cm
+d0.Value = 2
+# use Update() method to get the new part volume
+oDoc.Update()
+# fit the active view and save the part image
+invApp.ActiveView.Fit(True)
+oDoc.SaveAs("C:/tmp/Part1.png", True)
+print(oDoc.ComponentDefinition.MassProperties.Volume)
+#invApp.Quit()</pre>
+<p></p><h3>Python for NX</h3>
+<p>針對 HW1 使用 NX12.0.2 教育版繪零件圖者, 可以利用下列 Python 程式修改零件參數, 取零件影像圖並計算零件體積:</p>
+<p>參考零件: <a href="http://wcm.cycu.org:88/github/cad2020/downloads/nx12/journal/block.prt">block.prt</a></p>
+<p><a href="https://docs.plm.automation.siemens.com/data_services/resources/nx/12/nx_api/custom/en_US/nxopen_python_ref/index.html">NX12 NXOpen Python API Reference</a></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># nx_open_part.py
+# 導入 NXOpen
+import NXOpen
+import NXOpen.UF
+import NXOpen.Gateway
+   
+def main():
+    # 取得目前開啟的工作階段
+    theSession = NXOpen.Session.GetSession()
+    theUfSession = NXOpen.UF.UFSession.GetUFSession()
+      
+    # 建立 ListingWindow
+    listWin= theSession.ListingWindow
+    # 開啟零件檔案
+    basePart1 = theSession.Parts.OpenBaseDisplay("c:/tmp/block.prt")
+    workPart = theSession.Parts.Work
+    unit1 = workPart.UnitCollection.FindObject("MilliMeter")
+    # height
+    p7 = workPart.Expressions.FindObject("p7")
+    # width
+    p8 = workPart.Expressions.FindObject("p8")
+    # length
+    p9 = workPart.Expressions.FindObject("p9")
+    workPart.Expressions.EditWithUnits(p7, unit1, "30")
+    workPart.Expressions.EditWithUnits(p8, unit1, "60")
+    workPart.Expressions.EditWithUnits(p9, unit1, "90")
+    theSession.UpdateManager.DoUpdate(0)
+    #saveStatus1 = workPart.SaveAs("c:/tmp/block_new.prt")
+    #saveStatus1.Dispose()
+    # initialize list to hold bodies
+    theBodyTags = []
+   
+    for x in workPart.Bodies:
+        if x.IsSolidBody:
+            theBodyTags.append(x.Tag)
+      
+    # 準備輸出 ASCII 格式 STL 零件檔案
+    sTLCreator1 = theSession.DexManager.CreateStlCreator()
+    sTLCreator1.AutoNormalGen = True
+    sTLCreator1.ChordalTol = 0.08
+    sTLCreator1.AdjacencyTol = 0.08
+    sTLCreator1.OutputFile = "C:\\tmp\\block_ascii.stl"
+    # Binary STL: NXOpen.STLCreatorOutputTypeEnum.Binary
+    sTLCreator1.OutputType = NXOpen.STLCreatorOutputTypeEnum.Text
+    # 已知 body1 命名
+    body1 = workPart.Bodies.FindObject("EXTRUDE(2)")
+    added1 = sTLCreator1.ExportSelectionBlock.Add(body1)
+    nXObject1 = sTLCreator1.Commit()
+    sTLCreator1.Destroy()
+  
+    # 開啟所建立的 ListingWindow
+    listWin.Open()
+    listWin.WriteLine("number of solid bodies: " + str(len(theBodyTags)))
+   
+    (massProps, Stats) = theUfSession.Modeling.AskMassProps3d(theBodyTags, len(theBodyTags), 1, 4, .03, 1, [0.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0])
+    listWin.WriteLine("units: kg, mm")
+    listWin.WriteLine("surface area: " + str(massProps[0]))
+    listWin.WriteLine("volume: " + str(massProps[1]*1E9))
+    # 在 ListingWindow 中寫入字串
+    listWin.WriteLine("Hello, NXOpen")
+    listWin.Close()
+     
+    # 將零件檔案 fit 之後, export 出 png 檔案
+    theUI = NXOpen.UI.GetUI()
+    imageExportBuilder1 = theUI.CreateImageExportBuilder()
+ 
+    custombackgroundcolor1 = [None] * 3
+    custombackgroundcolor1[0] = 1.0
+    custombackgroundcolor1[1] = 1.0
+    custombackgroundcolor1[2] = 1.0
+ 
+    imageExportBuilder1.SetCustomBackgroundColor(custombackgroundcolor1)
+    imageExportBuilder1.FileFormat = NXOpen.Gateway.ImageExportBuilder.FileFormats.Png
+    imageExportBuilder1.FileName = "c:\\tmp\\block.png"
+ 
+    imageExportBuilder1.BackgroundOption = NXOpen.Gateway.ImageExportBuilder.BackgroundOptions.Original
+ 
+    imageExportBuilder1.EnhanceEdges = False
+    imageExportBuilder1.RegionMode = False
+    # fit view 後 commit export png
+    workPart.ModelingViews.WorkView.Fit()
+    nXObject6 = imageExportBuilder1.Commit()
+ 
+    imageExportBuilder1.Destroy()
+      
+if __name__ == "__main__":
+    main()</pre>
+<p></p><h2>CAE</h2>
+<h4>Mechatronic control system design and simulation:</h4>
+<h4 style="padding-left: 30px;">Coppeliasim:</h4>
+<p style="padding-left: 60px;"><a href="https://www.coppeliarobotics.com/">https://www.coppeliarobotics.com/</a></p>
+<p style="padding-left: 90px;"><a href="https://www.coppeliarobotics.com/helpFiles/en/remoteApiFunctionsPython.htm">https://www.coppeliarobotics.com/helpFiles/en/remoteApiFunctionsPython.htm</a></p>
+<p style="padding-left: 90px;"><a href="https://www.coppeliarobotics.com/helpFiles/en/zmqRemoteApiOverview.htm">https://www.coppeliarobotics.com/helpFiles/en/zmqRemoteApiOverview.htm</a></p>
+<p style="padding-left: 90px;"><a href="https://github.com/CoppeliaRobotics">https://github.com/CoppeliaRobotics</a> </p>
+<h4 style="padding-left: 30px;">Webots:</h4>
+<p style="padding-left: 60px;"><a href="https://cyberbotics.com/">https://cyberbotics.com/</a> </p>
+<p style="padding-left: 60px;"><a href="https://github.com/cyberbotics/webots">https://github.com/cyberbotics/webots</a> </p>
+<h4>FEM:</h4>
+<h4 style="padding-left: 30px;">sfepy:</h4>
+<p style="padding-left: 60px;"><a href="https://sfepy.org/doc-devel">https://sfepy.org/doc-devel</a></p>
+<p style="padding-left: 60px;"><a href="https://github.com/sfepy/sfepy">https://github.com/sfepy/sfepy</a></p>
+<p style="padding-left: 60px;"><a href="https://sfepy.org/doc-devel/examples/gallery.html">https://sfepy.org/doc-devel/examples/gallery.html</a></p>
+<h4 style="padding-left: 30px;">Netgen/NGSolve:</h4>
+<p style="padding-left: 60px;"><a href="https://www.math.uzh.ch/compmath/fileadmin/user/stas/compmath/Abschlussarbeiten/Arnold_Noam/myManual.pdf">https://www.math.uzh.ch/compmath/fileadmin/user/stas/compmath/Abschlussarbeiten/Arnold_Noam/myManual.pdf</a></p>
+<p style="padding-left: 60px;"><a href="https://ngsolve.org/">https://ngsolve.org/</a></p>
+<p style="padding-left: 60px;"><a href="https://github.com/NGSolve/ngsolve">https://github.com/NGSolve/ngsolve</a></p>
+<p style="padding-left: 60px;"><a href="https://github.com/NGSolve/netgen">https://github.com/NGSolve/netgen</a></p>
+<p style="padding-left: 60px;"></p><h2>MS Graph</h2>
+<p>Microsoft Graph client library for Python</p>
+<p><a href="https://github.com/microsoftgraph/msgraph-sdk-python-core">https://github.com/microsoftgraph/msgraph-sdk-python-core</a> </p>
+<h4>MS Teams:</h4>
+<p style="padding-left: 30px;">Microsoft Teams is the ultimate hub for teamwork and intelligent communications. Built on the strength and scale of Microsoft 365 with over 120 million users, Microsoft Teams delivers chat-based collaboration, meetings, calling, and enterprise voice features.</p>
+<h4>MS Graph:</h4>
+<p style="padding-left: 30px;">Microsoft Graph makes it easy to create large numbers of teams and populate them with users and channels, by automating the creation and management of teams, channels, tabs, and apps. Microsoft Graph also lets you find and archive the teams you are no longer using. This is the same API that the Microsoft Teams Admin Center and Teams PowerShell cmdlets are built on.</p>
+<h4>安裝模組:</h4>
+<p style="padding-left: 30px;">pip install msgraph-core azure-identity</p>
+<p>Target:</p>
+<h4>MS Graph SDK for MS Teams:</h4>
+<p style="padding-left: 30px;"><a href="https://docs.microsoft.com/en-us/graph/teams-concept-overview">https://docs.microsoft.com/en-us/graph/teams-concept-overview</a> </p>
+<h4>Login: </h4>
+<p style="padding-left: 30px;"><a href="https://developer.microsoft.com/en-us/microsoft-365/dev-program">https://developer.microsoft.com/en-us/microsoft-365/dev-program</a> </p>
+<p></p>
