@@ -130,7 +130,7 @@ img.add_border {
                             <li><a href="./../blog/index.html">blog</a></li>
                         </ul>
                       </li>
-                     <li><a href='About.html'>About</a><li><a href='Brython.html'>Brython</a><li class='has-children'><a href='CPython.html'>CPython</a><ul class='dropdown'><li class='has-children'><a href='CAD.html'>CAD</a><ul class='dropdown'><li><a href='Python for SW.html'>Python for SW</a><li><a href='Python for INV.html'>Python for INV</a><li><a href='Python for NX.html'>Python for NX</a></li></ul><li><a href='CAE.html'>CAE</a><li><a href='MS Graph.html'>MS Graph</a></li>
+                     <li><a href='About.html'>About</a><li><a href='Brython.html'>Brython</a><li class='has-children'><a href='CPython.html'>CPython</a><ul class='dropdown'><li class='has-children'><a href='CAD.html'>CAD</a><ul class='dropdown'><li><a href='Python for SW.html'>Python for SW</a><li><a href='Python for INV.html'>Python for INV</a><li><a href='Python for NX.html'>Python for NX</a></li></ul><li><a href='CAE.html'>CAE</a><li class='has-children'><a href='MS Graph.html'>MS Graph</a><ul class='dropdown'><li><a href='MS Teams.html'>MS Teams</a></li>
                       </ul>
                 </nav>
               </div>
@@ -172,7 +172,50 @@ for i in classes:
         # 列出已經不在評分名單中的學號
         if stud_num not in score_list_data:
             print(stud_num)</pre>
-<br />Brython << <a href='Brython.html'>Previous</a> <a href='CAD.html'>Next</a> >> CAD</div>
+<p>MS Teams assignment downloaded directory rename:</p>
+<p style="padding-left: 30px;">os 模組的 walk() 應用</p>
+<p style="padding-left: 30px;">next() 應用</p>
+<p style="padding-left: 30px;">讀取檔案內容</p>
+<p style="padding-left: 30px;">splitlines() 將各行資料納入數列</p>
+<p style="padding-left: 30px;">dictionary 資料結構應用</p>
+<p style="padding-left: 30px;">for 重複迴圈應用</p>
+<p style="padding-left: 30px;">try 與 except 應用</p>
+<p style="padding-left: 30px;">os 模組的 rename() 應用</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import os
+
+'''
+MS Teams student submitted assignment files can be downloaded through SharePoint App, but directory named as student name,
+we may use this program to rename directory into student number
+'''
+# from https://stackoverflow.com/questions/141291/how-to-list-only-top-level-directories-in-python
+# rename directory: os.rename(source,destination)
+stud_name_list = next(os.walk('./cd2022_student'))[1]
+#print(stud_name_list)
+# read data from wcm2022_5j_stud_name_email.txt
+# firstname \t lastname \t email
+with open("cd2022_stud_name_email.txt", encoding="utf-8") as f:
+    data = f.read().splitlines()
+# set stud_name and stud_num into dict
+stud_dict = {}
+# skip the first line
+for i in data[1:]:
+    line = i.split("\t")
+    firstname = line[0]
+    lastname = line[1]
+    # get student number from email
+    stud_num = line[2].split("@")[0]
+    stud_dict[lastname+firstname] = stud_num
+print(stud_dict)
+dir_pre = './cd2022_student/'
+# loop stud_name_list and rename into stud_num
+for i in stud_name_list:
+    try:
+        os.rename(dir_pre+i, dir_pre+stud_dict[i])
+        print("rename ", i, " into ", stud_dict[i])
+    except:
+        print(i, "no data")
+</pre>
+<p></p><br />Brython << <a href='Brython.html'>Previous</a> <a href='CAD.html'>Next</a> >> CAD</div>
         
     <!-- footer -->
       <div class="container">

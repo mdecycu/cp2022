@@ -480,7 +480,49 @@ for i in classes:
         # 列出已經不在評分名單中的學號
         if stud_num not in score_list_data:
             print(stud_num)</pre>
-<h2>CAD</h2>
+<p>MS Teams assignment downloaded directory rename:</p>
+<p style="padding-left: 30px;">os 模組的 walk() 應用</p>
+<p style="padding-left: 30px;">next() 應用</p>
+<p style="padding-left: 30px;">讀取檔案內容</p>
+<p style="padding-left: 30px;">splitlines() 將各行資料納入數列</p>
+<p style="padding-left: 30px;">dictionary 資料結構應用</p>
+<p style="padding-left: 30px;">for 重複迴圈應用</p>
+<p style="padding-left: 30px;">try 與 except 應用</p>
+<p style="padding-left: 30px;">os 模組的 rename() 應用</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import os
+'''
+MS Teams student submitted assignment files can be downloaded through SharePoint App, but directory named as student name,
+we may use this program to rename directory into student number
+'''
+# from https://stackoverflow.com/questions/141291/how-to-list-only-top-level-directories-in-python
+# rename directory: os.rename(source,destination)
+stud_name_list = next(os.walk('./cd2022_student'))[1]
+#print(stud_name_list)
+# read data from wcm2022_5j_stud_name_email.txt
+# firstname \t lastname \t email
+with open("cd2022_stud_name_email.txt", encoding="utf-8") as f:
+    data = f.read().splitlines()
+# set stud_name and stud_num into dict
+stud_dict = {}
+# skip the first line
+for i in data[1:]:
+    line = i.split("\t")
+    firstname = line[0]
+    lastname = line[1]
+    # get student number from email
+    stud_num = line[2].split("@")[0]
+    stud_dict[lastname+firstname] = stud_num
+print(stud_dict)
+dir_pre = './cd2022_student/'
+# loop stud_name_list and rename into stud_num
+for i in stud_name_list:
+    try:
+        os.rename(dir_pre+i, dir_pre+stud_dict[i])
+        print("rename ", i, " into ", stud_dict[i])
+    except:
+        print(i, "no data")
+</pre>
+<p></p><h2>CAD</h2>
 <p>SolidWorks: <a href="https://www.solidworks.com/">https://www.solidworks.com/</a> </p>
 <p>AutoDesk Inventor: <a href="https://www.autodesk.com/products/inventor">https://www.autodesk.com/products/inventor</a> </p>
 <p>Siemens NX: <a href="https://www.plm.automation.siemens.com/global/en/products/nx/">https://www.plm.automation.siemens.com/global/en/products/nx/</a> </p>
@@ -778,6 +820,8 @@ if __name__ == "__main__":
 <h4>MS Graph:</h4>
 <p style="padding-left: 30px;">Microsoft Graph makes it easy to create large numbers of teams and populate them with users and channels, by automating the creation and management of teams, channels, tabs, and apps. Microsoft Graph also lets you find and archive the teams you are no longer using. This is the same API that the Microsoft Teams Admin Center and Teams PowerShell cmdlets are built on.</p>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/KCvAhQEJmyY" title="YouTube video player" width="560"></iframe></p>
+<h4>More MS Teams related video:</h4>
+<p style="padding-left: 30px;"><a href="https://www.youtube.com/c/Microsoft365Developer/search?query=Teams">https://www.youtube.com/c/Microsoft365Developer/search?query=Teams</a></p>
 <h4>安裝模組:</h4>
 <p style="padding-left: 30px;">pip install msgraph-core azure-identity</p>
 <p>Target:</p>
@@ -785,4 +829,13 @@ if __name__ == "__main__":
 <p style="padding-left: 30px;"><a href="https://docs.microsoft.com/en-us/graph/teams-concept-overview">https://docs.microsoft.com/en-us/graph/teams-concept-overview</a></p>
 <h4>Login: </h4>
 <p style="padding-left: 30px;"><a href="https://developer.microsoft.com/en-us/microsoft-365/dev-program">https://developer.microsoft.com/en-us/microsoft-365/dev-program</a></p>
+<h3>MS Teams</h3>
+<p><a href="https://docs.microsoft.com/en-us/sharepoint/dev/solution-guidance/security-apponly-azuread">Granting access via Azure AD App-Only | Microsoft Docs</a></p>
+<p style="padding-left: 30px;">Azure Access Control (ACS), a service of Azure Active Directory (Azure AD), has been retired on November 7, 2018. This retirement does not impact the SharePoint Add-in model, which uses the <a href="https://accounts.accesscontrol.windows.net">https://accounts.accesscontrol.windows.net</a> hostname (which is not impacted by this retirement). For more information, see <a href="https://developer.microsoft.com/office/blogs/impact-of-azure-access-control-deprecation-for-sharepoint-add-ins">Impact of Azure Access Control retirement for SharePoint Add-ins</a>.</p>
+<p>Download MS Teams Student submitted files:</p>
+<ol>
+<li>Login to Onedrive.</li>
+<li>From App Launcher, select SharePoint -&gt; My sites.</li>
+<li>Search for the specific class -&gt; Site contents -&gt; Student Work -&gt; Submitted Files, click Download to download all submitted files or use Ctrl to select multiple students and click Download to download associated files.</li>
+</ol>
 <p></p>
