@@ -141,81 +141,10 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">Brython << <a href='Brython.html'>Previous</a> <a href='CAD.html'>Next</a> >> CAD<br /><h1>CPython</h1>
-<p>比對兩份資料, 列出差異:</p>
-<p style="padding-left: 30px;">數列應用</p>
-<p style="padding-left: 30px;">for 重複迴圈</p>
-<p style="padding-left: 30px;">以 utf-8 編碼讀出檔案內容</p>
-<p style="padding-left: 30px;">splitlines() 函式逐行將檔案內容放入數列</p>
-<p style="padding-left: 30px;">if 判斷式應用</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># 兩份資料所在目錄字串
-studlist_path = "Y:/studlist/2022spring/"
-score_path = "Y:/score/2022/spring/"
-# score 區檔案套稿字串
-score_file_temp = "_stud_list.txt"
-# 班級代號數列
-classes = ["1a", "2a", "2b", "5j"]
-
-# 利用 for 迴圈, 逐班進行處理
-for i in classes:
-    # read data from studlist
-    # 以 utf-8 編碼開啟檔案
-    with open(studlist_path + i + ".txt", encoding="utf-8") as f:
-        studlist_data = f.read().splitlines()
-    #print(studlist_data)
-    with open(score_path + i + "/" + i + score_file_temp, encoding="utf-8") as f:
-        score_list_data = f.read().splitlines()
-    #print(score_list_data)
-    for i in studlist_data:
-        stud_num = i.split("\t")[0]
-        #print(stud_num)
-        # 列出已經不在評分名單中的學號
-        if stud_num not in score_list_data:
-            print(stud_num)</pre>
-<p>MS Teams assignment downloaded directory rename:</p>
-<p style="padding-left: 30px;">os 模組的 walk() 應用</p>
-<p style="padding-left: 30px;">next() 應用</p>
-<p style="padding-left: 30px;">讀取檔案內容</p>
-<p style="padding-left: 30px;">splitlines() 將各行資料納入數列</p>
-<p style="padding-left: 30px;">dictionary 資料結構應用</p>
-<p style="padding-left: 30px;">for 重複迴圈應用</p>
-<p style="padding-left: 30px;">try 與 except 應用</p>
-<p style="padding-left: 30px;">os 模組的 rename() 應用</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import os
-
-'''
-MS Teams student submitted assignment files can be downloaded through SharePoint App, but directory named as student name,
-we may use this program to rename directory into student number
-'''
-# from https://stackoverflow.com/questions/141291/how-to-list-only-top-level-directories-in-python
-# rename directory: os.rename(source,destination)
-stud_name_list = next(os.walk('./cd2022_student'))[1]
-#print(stud_name_list)
-# read data from wcm2022_5j_stud_name_email.txt
-# firstname \t lastname \t email
-with open("cd2022_stud_name_email.txt", encoding="utf-8") as f:
-    data = f.read().splitlines()
-# set stud_name and stud_num into dict
-stud_dict = {}
-# skip the first line
-for i in data[1:]:
-    line = i.split("\t")
-    firstname = line[0]
-    lastname = line[1]
-    # get student number from email
-    stud_num = line[2].split("@")[0]
-    stud_dict[lastname+firstname] = stud_num
-print(stud_dict)
-dir_pre = './cd2022_student/'
-# loop stud_name_list and rename into stud_num
-for i in stud_name_list:
-    try:
-        os.rename(dir_pre+i, dir_pre+stud_dict[i])
-        print("rename ", i, " into ", stud_dict[i])
-    except:
-        print(i, "no data")
-</pre>
-<p></p><br />Brython << <a href='Brython.html'>Previous</a> <a href='CAD.html'>Next</a> >> CAD</div>
+    <div id="tipue_search_content">MS Teams << <a href='MS Teams.html'>Previous</a> <a href='VSCode.html'>Next</a> >> VSCode<br /><h1>cmsimde</h1>
+<p><a href="https://github.com/mdecycu/cmsimde">https://github.com/mdecycu/cmsimde</a> </p>
+<h4>cmsimde Template:</h4>
+<p style="padding-left: 30px;"><a href="https://github.com/mdecycu/cmstemplate">https://github.com/mdecycu/cmstemplate</a> </p><br />MS Teams << <a href='MS Teams.html'>Previous</a> <a href='VSCode.html'>Next</a> >> VSCode</div>
         
     <!-- footer -->
       <div class="container">
