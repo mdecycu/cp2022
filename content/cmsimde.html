@@ -94,7 +94,7 @@ img.add_border {
 
 </head>
 <body>
-<div class='container-fluid'><nav>
+<div class='container'><nav>
         
     <div class="site-wrap">
 
@@ -108,7 +108,7 @@ img.add_border {
     </div>
     
             <header class="site-navbar py-4 bg-white" role="banner">
-              <div class="container-fluid">
+              <div class="container">
                 <div class="row align-items-center">
                 <h1>cp2022 計算機程式</h1>
                 <div class="pl-4">
@@ -149,7 +149,18 @@ img.add_border {
 <p>的 class='container-fluid' 改為 class='container', 根據 <a href="https://getbootstrap.com/docs/5.0/layout/containers/">bootstrap containers</a> 頁面的說明, 能夠將現有散佈在頁面 100% 的內容, 取用各不同尺寸螢幕的局部大小:</p>
 <p><img alt="" class="add_border" height="254" src="./../images/bootstrap_contener_table.png" width="600"/></p>
 <h4>cmsimde Template:</h4>
-<p style="padding-left: 30px;"><a href="https://github.com/mdecycu/cmstemplate">https://github.com/mdecycu/cmstemplate</a></p><br />MS Teams << <a href='MS Teams.html'>Previous</a> <a href='VSCode.html'>Next</a> >> VSCode</div>
+<p style="padding-left: 30px;"><a href="https://github.com/mdecycu/cmstemplate">https://github.com/mdecycu/cmstemplate</a></p>
+<h4>cmsimde submodule update:</h4>
+<p style="padding-left: 30px;">使用 cmsimde 作為 submodule 的倉儲, 當發現 cmsimde 倉儲內容已經更新後, 若希望使用更新後的子模組內容, 則可以利用下列指令完成:</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">REM 從倉儲更換目錄至 cmsimde
+cd cmsimde
+REM 利用 git 指令中的 pull, 從 origin 代號的網路連結, 取回 master 分支的內容, 在近端進行合併
+git pull origin master
+REM 回到原始倉儲目錄
+cd ..
+REM 利用 acp.bat 中的 git add, git commit 與 git push 將更新資料送到遠端 github 倉儲中
+acp "update cmsimde submodule"</pre>
+<p style="padding-left: 30px;"></p><br />MS Teams << <a href='MS Teams.html'>Previous</a> <a href='VSCode.html'>Next</a> >> VSCode</div>
         
     <!-- footer -->
       <div class="container">
