@@ -4,7 +4,7 @@ import os
 # basic files for Python installation
 py_list = ["core", "dev", "exe", "lib", "tcltk", "tools"]
 # Python version
-version = "3.10.2"
+version = "3.10.5"
 # Python msi download URL
 ftp = "https://www.python.org/ftp/python/" + version + "/amd64/"
 # location for Portable Python

@@ -845,7 +845,7 @@ if __name__ == "__main__":
 <p>由於全球資訊網頁中主要使用 html, css 與 javascript 控制網頁內容, 因此在利用 <a href="https://github.com/mdecycu/cmsimde">cmsimde</a> 管理數位內容時, 必須同時對這三種語言有一定的認識.</p>
 <h4>有關 html (html5) 請參考:</h4>
 <p style="padding-left: 30px;"><a href="https://link.springer.com/book/10.1007/978-1-4302-3862-1">HTML5 Mastery</a></p>
-<p style="padding-left: 30px;">假如要在網頁中嵌入 2D 物件, 請參考:</p>
+<h4 style="padding-left: 30px;">假如要在網頁中嵌入 2D 物件, 請參考:</h4>
 <p style="padding-left: 60px;"><a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API">https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API</a></p>
 <h4 style="padding-left: 30px;">假如要在網頁中嵌入 3D 物件, 請參考:</h4>
 <p style="padding-left: 60px;"><a href="https://link.springer.com/book/10.1007/978-1-4302-3997-0">Beginning WebGL for HTML5</a></p>
@@ -874,8 +874,7 @@ REM 利用 acp.bat 中的 git add, git commit 與 git push 將更新資料送到
 acp "update cmsimde submodule"</pre>
 <h4>Are we living in a smart city (University, College, Department, Class, Group)?</h4>
 <h4>我們生活在智慧城市 (大學, 學院, 科系, 班級, 團隊) 嗎?</h4>
-<p style="padding-left: 30px;"><a href="https://link.springer.com/referencework/10.1007/978-3-030-69698-6">Handbook of Smart Cities</a></p>
-<h2>Portable Python</h2>
+<p style="padding-left: 30px;"><a href="https://link.springer.com/referencework/10.1007/978-3-030-69698-6">Handbook of Smart Cities</a></p><h2>Portable Python</h2>
 <h4>何謂可攜式 Python 程式環境?</h4>
 <h4 style="padding-left: 30px;">Python 程式是如何執行的?</h4>
 <p style="padding-left: 30px;">首先 Python 是一種解譯式 (Interpreted) 程式語言, 與 C 或 C++ 程式語言最大的差別是, C/C++ 程式碼通常必須透過編譯 (Compile) 與連結 (Link) 的過程, 將原始碼轉為可執行的格式 (在 Windows 操作系統為 .exe 檔案), 而 Python 程式寫好後, 可以直接利用解譯器執行, 使用者不需要手動執行程式碼的編譯, 而是由解譯器在執行前即時將程式碼轉換為可執行檔案.</p>
@@ -904,9 +903,9 @@ acp "update cmsimde submodule"</pre>
 <p style="padding-left: 60px;">(1) Python 解譯器系統檔案</p>
 <p style="padding-left: 60px;">(2) 可攜啟動設定批次檔 (例如: <a href="/downloads/start_ipv6.bat">start_ipv6.bat</a>)</p>
 <p style="padding-left: 30px;">要在 Windows 操作系統中, 取得各版本的 Python 解譯器系統檔案, 也有兩種方法:</p>
-<p style="padding-left: 60px;">(1) 從官方網站下載安裝檔 (例如: <a href="https://www.python.org/ftp/python/3.10.2/">3.10.2 版</a>的 <a href="https://www.python.org/ftp/python/3.10.2/python-3.10.2-amd64.exe">python-3.10.2-amd64.exe)</a>, 手動安裝 Python, 取下安裝內容後, 解除安裝程式.</p>
-<p style="padding-left: 60px;">(2) 利用 <a href="/downloads/gen_portable_python.py">gen_portable_python.py</a>, 從 Python 官方網站下載基本的 .msi 檔案 (例如 <a href="https://www.python.org/ftp/python/3.10.2/amd64/">3.10.2 版</a>中的 core.msi, dev.msi, exe.msi, lib.msi, tcltk.msi 與 tools.msi), 然後利用 <a href="https://docs.microsoft.com/zh-tw/windows-server/administration/windows-commands/msiexec">msiexec.exe</a> 配合 <a href="https://docs.microsoft.com/zh-tw/windows/win32/msi/targetdir">targetdir</a> 屬性解開各安裝檔.</p>
-<p id="pp310">以下將要結合 <a href="https://www.scintilla.org/SciTE.html">SciTE</a>, <a href="https://github.com/TinyCC/tinycc">Tiny C Compiler</a> 與 <a href="https://www.python.org/ftp/python/3.10.2/">Python 3.10.2</a>, 建立一個可攜版的 CPython 與 <a href="https://en.wikipedia.org/wiki/ANSI_C">ANSI C</a> 執行環境.</p>
+<p style="padding-left: 60px;">(1) 從官方網站下載安裝檔 (例如: <a href="https://www.python.org/ftp/python/3.10.5/">3.10.5 版</a>的 <a href="https://www.python.org/ftp/python/3.10.5/python-3.10.5-amd64.exe">python-3.10.5-amd64.exe)</a>, 手動安裝 Python, 取下安裝內容後, 解除安裝程式.</p>
+<p style="padding-left: 60px;">(2) 利用 <a href="/downloads/gen_portable_python.py">gen_portable_python.py</a>, 從 Python 官方網站下載基本的 .msi 檔案 (例如 <a href="https://www.python.org/ftp/python/3.10.5/amd64/">3.10.5 版</a>中的 core.msi, dev.msi, exe.msi, lib.msi, tcltk.msi 與 tools.msi), 然後利用 <a href="https://docs.microsoft.com/zh-tw/windows-server/administration/windows-commands/msiexec">msiexec.exe</a> 配合 <a href="https://docs.microsoft.com/zh-tw/windows/win32/msi/targetdir">targetdir</a> 屬性解開各安裝檔.</p>
+<p id="pp310">以下將要結合 <a href="https://www.scintilla.org/SciTE.html">SciTE</a>, <a href="https://github.com/TinyCC/tinycc">Tiny C Compiler</a> 與 <a href="https://www.python.org/ftp/python/3.10.5/">Python 3.10.5</a>, 建立一個可攜版的 CPython 與 <a href="https://en.wikipedia.org/wiki/ANSI_C">ANSI C</a> 執行環境.</p>
 <ol>
 <li>從 <a href="http://download.savannah.gnu.org/releases/tinycc/">http://download.savannah.gnu.org/releases/tinycc/</a> 下載 <a href="http://download.savannah.gnu.org/releases/tinycc/tcc-0.9.27-win64-bin.zip">tcc-0.9.27-win64-bin.zip</a>.</li>
 <li>從 <a href="https://www.scintilla.org/SciTEDownload.html">https://www.scintilla.org/SciTEDownload.html</a> 下載 <a href="https://www.scintilla.org/wscite521.zip">wscite521.zip</a>.</li>
@@ -979,7 +978,25 @@ var winkVideoData2 = {
 </p>
 <div class="winkVideoContainerClass"><video autoplay="autoplay" class="winkVideoClass" controls="controls" data-dirname="/static" data-varname="winkVideoData2" height="630" muted="true" width="1008">
 <source src="/downloads/ssh_wink/wink_ssh.mp4" type="video/mp4"/></video></div>
-</div><h1>VSCode</h1>
+</div>
+<h2>Bootstrap</h2>
+<p><a href="https://getbootstrap.com/">https://getbootstrap.com/</a></p>
+<h4>cmsimde page:</h4>
+<p style="padding-left: 30px;">head banner</p>
+<p style="padding-left: 30px;">search form</p>
+<p style="padding-left: 30px;">page navigator</p>
+<p style="padding-left: 30px;">page content</p>
+<p style="padding-left: 30px;">pelican blog</p>
+<p style="padding-left: 30px;">reveal</p>
+<h4>Bootstrap editor:</h4>
+<p style="padding-left: 30px;"><a href="https://www.layoutit.com/">https://www.layoutit.com/</a></p>
+<p style="padding-left: 30px;"><a href="https://github.com/Vegetam/BootstrapPageGenerator">https://github.com/Vegetam/BootstrapPageGenerator</a></p>
+<h4>Flask and Bootstrap:</h4>
+<p style="padding-left: 30px;"><a href="https://github.com/mbr/flask-bootstrap">https://github.com/mbr/flask-bootstrap</a></p>
+<p style="padding-left: 30px;"><a href="https://www.techwithtim.net/tutorials/flask/adding-bootstrap/">https://www.techwithtim.net/tutorials/flask/adding-bootstrap/</a></p>
+<p style="padding-left: 30px;"><a href="https://pythonhosted.org/Flask-Bootstrap/basic-usage.html">https://pythonhosted.org/Flask-Bootstrap/basic-usage.html</a></p>
+<p style="padding-left: 30px;"><a href="https://github.com/MashSoftware/flask-bootstrap-ui">https://github.com/MashSoftware/flask-bootstrap-ui</a></p>
+<p style="padding-left: 30px;"><a href="https://github.com/hfilimonescu/flask-bs4">https://github.com/hfilimonescu/flask-bs4</a> </p><h1>VSCode</h1>
 <h4>EBooks:</h4>
 <p style="padding-left: 30px;"><a href="https://link.springer.com/book/10.1007/978-1-4842-6901-5">Visual Studio Code Distilled </a></p>
 <p style="padding-left: 30px;"><a href="https://link.springer.com/book/10.1007/978-1-4842-7344-9">Optimizing Visual Studio Code for Python Development </a></p>
