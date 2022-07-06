@@ -311,7 +311,34 @@ shared/config/tce_email_config.php
 
 You can also disable the email verification by editing:
 
-shared/config/tce_user_registration.php</t>
+shared/config/tce_user_registration.php
+
+\tcexam\shared\code\tce_functions_session.php
+
+fix the following error:
+
+&lt;pre class="brush: jscript"&gt;
+Fatal error: Uncaught TypeError: 
+Session callback must have a return value of type bool, 
+PgSql\Result returned in C:\tmp\tcexam\admin\code\tce_logout.php:38 Stack trace:
+#0 C:\tmp\tcexam\admin\code\tce_logout.php(38): session_destroy() 
+#1 {main} thrown in C:\tmp\tcexam\admin\code\tce_logout.php on line 38
+&lt;/pre&gt;
+
+starting \tcexam\shared\code\tce_functions_session.php line 141.
+
+&lt;pre class="brush: jscript"&gt;
+function F_session_destroy($key)
+{
+    global $db;
+    $key = F_escape_sql($db, $key);
+    $sql = 'DELETE FROM '.K_TABLE_SESSIONS.' WHERE cpsession_id=\''.$key.'\'';
+    //return F_db_query($sql, $db);
+    F_db_query($sql, $db);
+    // for PHP 8.1 Yen
+    return true;
+}
+&lt;/pre&gt;</t>
 <t tx="yen.20170108171605.1"></t>
 <t tx="yen.20170108171605.2">QTreeWidget {
     /* These apply to the selected item, but not to editing items.*/
