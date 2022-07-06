@@ -57,6 +57,12 @@
 <v t="leo.20180115115910.1"><vh>2022</vh>
 <v t="leo.20180423103639.1"><vh>2022 Fall CP 課程</vh>
 <v t="leo.20180423103656.1"><vh>@edit 20220701.md</vh></v>
+<v t="leo.20220705121453.1"><vh>@clean 20220705.md</vh>
+<v t="leo.20220705121709.1"><vh>2022 Fall 重整 cmsimde</vh></v>
+</v>
+<v t="leo.20220705203649.1"><vh>@clean 20220705-1.md</vh>
+<v t="leo.20220705204121.1"><vh>TCExam</vh></v>
+</v>
 </v>
 </v>
 </v>
@@ -88,6 +94,224 @@ g.es("admin pelican Github 執行完畢")
 <t tx="leo.20180115093726.1"></t>
 <t tx="leo.20180115115910.1"></t>
 <t tx="leo.20180423103639.1"></t>
+<t tx="leo.20220705121453.1">@language md
+---
+Title: 2022 Fall 重整 cmsimde
+Date: 2022-07-05 11:00
+Category: cmsimde
+Tags: 2022FallCP
+Slug: 2022-Fall-Reorganize-cmsimde
+Author: mdecycu
+---
+
+cmsimde 的頁面一直是利用 Python, 以 Flask 架構直接寫出網頁內容.
+
+&lt;!-- PELICAN_END_SUMMARY --&gt;
+
+@others</t>
+<t tx="leo.20220705121709.1">直接用程式寫出 html 通常是在開發階段, 需要驗證全球資訊網站前後端流程結合正確無誤時採用. 也就是所編寫的全球資訊網動態後端的程式, 能夠產生全端所需要的網站內容, 但壞處顯而易見: 網頁的 layout 修改都必須直接進入 server 端修改 python 程式才能處理.
+
+更好的方式, 是採用 Template, 而且是在 Bootstrap 架構下的 Template. 因為目前 cmsimde 採用 Bootstrap 4, 因此考慮採用 &lt;https://github.com/hfilimonescu/flask-bs4&gt;.
+
+在處理 cmsimde 採用 Flask Template + Bootstrap 議題時, 除了 Python 語法, Flask 架構, 還需要了解如何處理 Bootstrap 中的 html 與 css 程式. 因此這是一個中階的全球資訊網站計算機程式專案.
+
+Bootstrap
+----
+&lt;pre class="brush:html"&gt;
+&lt;div class="container-fluid"&gt;
+	&lt;div class="row"&gt;
+		&lt;div class="col-md-12"&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;div class="row"&gt;
+		&lt;div class="col-md-6"&gt;
+		&lt;/div&gt;
+		&lt;div class="col-md-6"&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;div class="row"&gt;
+		&lt;div class="col-md-8"&gt;
+		&lt;/div&gt;
+		&lt;div class="col-md-4"&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;div class="row"&gt;
+		&lt;div class="col-md-4"&gt;
+		&lt;/div&gt;
+		&lt;div class="col-md-4"&gt;
+		&lt;/div&gt;
+		&lt;div class="col-md-4"&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+&lt;/pre&gt;
+
+&lt;https://github.com/hfilimonescu/flask-bs4&gt;
+&lt;https://www.layoutit.com/build&gt;
+
+Flask
+----
+
+Template
+----
+
+cmsimde
+----
+
+Flask-bs4
+----</t>
+<t tx="leo.20220705203649.1">@language md
+---
+Title: TCExam
+Date: 2022-07-05 17:00
+Category: Exam
+Tags: TCExam
+Slug: Will-TCExam-still-be-usable-after-nine-years
+Author: mdecycu
+---
+
+上一次採用 TCExam, 是在 2013 年 11 月 1 日, 多年之後, 這套線上考試系統, 仍然可以使用嗎?
+
+&lt;!-- PELICAN_END_SUMMARY --&gt;
+
+@others</t>
+<t tx="leo.20220705204121.1">Ubuntu 22.04
+----
+
+為了要將 TCExam 安裝在 Ubuntu 22.04, 首先必須要先處理 /etc/netplan/net.yaml 中的設定:
+
+&lt;pre class="brush: jscript"&gt;
+network:
+  ethernets:
+    enp0s3:
+      dhcp6: false 
+      dhcp4: false
+      addresses:
+        - 140.130.xx.xxx/24
+        - 2001:288:6004:xx::xxx/64
+      nameservers:
+        addresses:
+          - 168.95.1.1
+          - 2001:b000:168::1
+      routes:
+        - to: default 
+          via: 140.130.xx.254
+        - to: ::/0      
+          via: 2001:288:6004:xx::254
+  version: 2
+&lt;/pre&gt;
+
+網路設定完成後, 隨即進行更新與升級:
+
+&lt;pre class="brush: jscript"&gt;
+sudo apt update
+sudo apt upgrade
+sudo apt autoremove
+&lt;/pre&gt;
+
+接下來希望以最小安裝放入桌面, 可以執行
+
+sudo apt install --no-install-recommends ubuntu-desktop
+
+但是因為 &lt;https://bugs.launchpad.net/ubuntu/+source/mutter/+bug/1980667&gt; bug 尚未處理, 因此暫時先建立 /etc/apt/apt.conf.d/phased 應急. 之後應該要將這個檔案刪除, 採用官方除錯後的版本.
+
+接下來要安裝 nginx, 並且讓 php 解譯環境可以與 nginx 合用. 最後則是安裝 Postgresql, 以及 TCExam.
+
+Windows
+----
+
+假如要將 TCExam 安裝在 Windows 10, 則可以安裝 Nginx 1.20.1 and PHP 8.1.7 (vc_2019_for_php8.1.7.7z)
+
+&lt;pre class="brush:jscript"&gt;
+server { 
+    listen    98 ssl;
+    
+    root c:/tmp/TCExam;
+
+    server_name    c1.cycu.org;
+    ssl_certificate    C:/pj2022/stunnel/config/fullchain.pem;
+    ssl_certificate_key    C:/pj2022/stunnel/config/privkey.pem;
+    ssl_protocols    TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers    HIGH:!aNULL:!MD5;
+
+location ~ \.php$ {
+    fastcgi_pass   127.0.0.1:9123;
+    fastcgi_index  index.php;
+    fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+    include        fastcgi_params;
+    }
+}
+&lt;/pre&gt;
+
+nssm install php8.1.7
+
+&lt;pre class="brush:jscript"&gt;
+Application path: C:\PHP8.1.7\php-cgi.exe
+Startup directory: C:\PHP8.1.7
+Arguments: -b 127.0.0.1:9123
+&lt;/pre&gt;
+
+啟動 php-cgi:
+
+C:\PHP8.1.7\php-cgi.exe -b 127.0.0.1:9123
+
+PostgreSQL
+----
+
+可攜的 PostgreSQL 採用 &lt;https://github.com/pgsql-tw/portable-pgsql&gt; 中的設定.
+
+建立 postgres 用戶時, 以系統管理員執行 cmd:
+
+net user username password /add
+
+TCExam
+----
+
+Warning: pg_query(): Query failed: ERROR: relation "tce_sessions" already exists in C:\tmp\tcexam\shared\code\tce_db_dal_postgresql.php on line 83
+
+Deprecated: pg_last_error(): Automatic fetching of PostgreSQL connection is deprecated in C:\tmp\tcexam\shared\code\tce_db_dal_postgresql.php on line 69
+[ERROR ERROR: relation "tce_sessions" already exists]
+
+&lt;https://www.php.net/manual/en/function.pg-query.php&gt;
+
+shared/code/tce_functions_form.php
+
+line 294 加入 ?? ''
+
+    $str .= ' name="'.$field_name.'" id="'.$field_name.'" value="'.htmlspecialchars($value ?? '', ENT_COMPAT, $l['a_meta_charset']).'" size="20" maxlength="'.$maxlen.'" title="'.$description.'" /&gt;';
+
+admin/code/tce_edit_user.php
+
+line 373 也是加入 ?? ''
+
+    $user_birthdate = substr($m['user_birthdate'] ?? '', 0, 10);
+                    
+                    
+qrcode.php line 891 and 895 add intval()
+
+    $ret = $this-&gt;rsblocks[$row]['data'][intval($col)];
+    } elseif ($this-&gt;count &lt; $this-&gt;dataLength + $this-&gt;eccLength) {
+    $row = ($this-&gt;count - $this-&gt;dataLength) % $this-&gt;blocks;
+    $col = ($this-&gt;count - $this-&gt;dataLength) / $this-&gt;blocks;
+    $ret = $this-&gt;rsblocks[$row]['ecc'][intval($col)];
+
+尚未處理的 error:
+
+    Fatal error: Uncaught TypeError: Session callback must have a return value of type bool, PgSql\Result returned in C:\tmp\tcexam\admin\code\tce_logout.php:38 Stack trace: #0 C:\tmp\tcexam\admin\code\tce_logout.php(38): session_destroy() #1 {main} thrown in C:\tmp\tcexam\admin\code\tce_logout.php on line 38
+
+&lt;https://www.php.net/manual/en/language.operators.comparison.php#language.operators.comparison.coalesce&gt;
+
+user level 1, level 0 is anonymous
+
+SMTP send mail:
+
+You need to edit the following configuration file with the right parameters:
+
+shared/config/tce_email_config.php
+
+You can also disable the email verification by editing:
+
+shared/config/tce_user_registration.php</t>
 <t tx="yen.20170108171605.1"></t>
 <t tx="yen.20170108171605.2">QTreeWidget {
     /* These apply to the selected item, but not to editing items.*/

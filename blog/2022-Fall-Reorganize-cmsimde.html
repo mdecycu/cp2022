@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 
-  <title>2022Fall 計算機程式 - Authors</title>
+  <title>2022 Fall 重整 cmsimde</title>
 
 
   <meta name="HandheldFriendly" content="True" />
@@ -18,6 +18,7 @@
 
   <!-- Feed -->
         <link href="./feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="2022Fall 計算機程式 Full Atom Feed" />
+          <link href="./feeds/{slug}.atom.xml" type="application/atom+xml" rel="alternate" title="2022Fall 計算機程式 Categories Atom Feed" />
 
   <link href="./theme/css/style.css" type="text/css" rel="stylesheet" />
 
@@ -39,27 +40,49 @@
   <![endif]-->
 
 
+    <link href="./2022-Fall-Reorganize-cmsimde.html" rel="canonical" />
+
+        <meta name="description" content="cmsimde 的頁面一直是利用 Python, 以 Flask 架構直接寫出網頁內容.">
+
+        <meta name="author" content="mdecycu">
+
+        <meta name="tags" content="2022FallCP">
+
+
 
 
 <!-- Open Graph -->
 <meta property="og:site_name" content="2022Fall 計算機程式"/>
-<meta property="og:type" content="blog"/>
-<meta property="og:title" content="2022Fall 計算機程式"/>
-<meta property="og:description" content="View the blog."/>
+<meta property="og:title" content="2022 Fall 重整 cmsimde"/>
+<meta property="og:description" content="cmsimde 的頁面一直是利用 Python, 以 Flask 架構直接寫出網頁內容."/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="./"/>
-<meta property="og:image" content="./theme/images/home-bg.jpg">
+<meta property="og:url" content="./2022-Fall-Reorganize-cmsimde.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2022-07-05 11:00:00+08:00"/>
+<meta property="article:modified_time" content="2022-07-05 12:50:56.034461+08:00"/>
+<meta property="article:author" content="./author/mdecycu.html">
+<meta property="article:section" content="cmsimde"/>
+<meta property="article:tag" content="2022FallCP"/>
+<meta property="og:image" content="./theme/images/post-bg.jpg">
 
 <!-- Twitter Card -->
 
 <script type="application/ld+json">
 {
-  "@context" : "http://schema.org",
-  "@type" : "Website",
-  "name": " 2022Fall 計算機程式 ",
-  "url" : "./",
-  "image": "./theme/images/home-bg.jpg",
-  "description": "View the blog."
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "2022 Fall 重整 cmsimde",
+  "headline": "2022 Fall 重整 cmsimde",
+  "datePublished": "2022-07-05 11:00:00+08:00",
+  "dateModified": "2022-07-05 12:50:56.034461+08:00",
+  "author": {
+    "@type": "Person",
+    "name": "mdecycu",
+    "url": "./author/mdecycu.html"
+  },
+  "image": "./theme/images/post-bg.jpg",
+  "url": "./2022-Fall-Reorganize-cmsimde.html",
+  "description": "cmsimde 的頁面一直是利用 Python, 以 Flask 架構直接寫出網頁內容."
 }
 </script>
 <script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shCore.js"></script>
@@ -157,19 +180,31 @@ init_mathjax();
     </ul>
   </div>
 </nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header id="blog-header" class="has-cover">
+    <header id="post-header" class="has-cover">
       <div class="inner">
         <nav id="navigation">
             <span id="home-button" class="nav-button">
-                <a class="home-button" href="./" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+                <a class="home-button" href="./index.html" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
             </span>
           <span id="menu-button" class="nav-button">
             <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
           </span>
         </nav>
-        <h1 class="post-title">Articles by </h1>
+        <h1 class="post-title">2022 Fall 重整 cmsimde</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="./author/mdecycu.html">Mdecycu</a>
+            | <time datetime="週二 05 七月 2022">週二 05 七月 2022</time>
+        </span>
+        <!-- TODO : Modified check -->
+            <span class="post-meta"> | Updated on 週二 05 七月 2022</span>
             <div class="post-cover cover" style="background-image: url('./theme/images/post-bg.jpg')">
       </div>
     </header>
@@ -183,15 +218,93 @@ init_mathjax();
     </form>
 </section>
 
-      <article class="post">
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
         <div class="inner">
-            <a href="./author/mdecycu.html" rel="bookmark">
-                <h2 class="post-title">
-                    mdecycu (2)
-                </h2>
-            </a>
+            <section class="post-content">
+                <p>cmsimde 的頁面一直是利用 Python, 以 Flask 架構直接寫出網頁內容.</p>
+
+
+<p>直接用程式寫出 html 通常是在開發階段, 需要驗證全球資訊網站前後端流程結合正確無誤時採用. 也就是所編寫的全球資訊網動態後端的程式, 能夠產生全端所需要的網站內容, 但壞處顯而易見: 網頁的 layout 修改都必須直接進入 server 端處理.</p>
+<p>更好的方式, 是採用 Template, 而且是在 Bootstrap 架構下的 Template. 因為目前 cmsimde 採用 Bootstrap 4, 因此考慮採用 <a href="https://github.com/hfilimonescu/flask-bs4">https://github.com/hfilimonescu/flask-bs4</a>.</p>
+<p>在處理 cmsimde 採用 Flask Template + Bootstrap 議題時, 除了 Python 語法, Flask 架構, 還需要了解如何處理 Bootstrap　中的 html 與 css 程式. 因此這是一個中階的全球資訊網站計算機程式專案.</p>
+<h2>Bootstrap</h2>
+<pre class="brush:html">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
         </div>
-      </article>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+</div>
+</pre>
+
+<p><a href="https://github.com/hfilimonescu/flask-bs4">https://github.com/hfilimonescu/flask-bs4</a>
+<a href="https://www.layoutit.com/build">https://www.layoutit.com/build</a></p>
+<h2>Flask</h2>
+<h2>Template</h2>
+<h2>cmsimde</h2>
+<h2>Flask-bs4</h2>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=2022 Fall 重整 cmsimde&amp;url=./2022-Fall-Reorganize-cmsimde.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=./2022-Fall-Reorganize-cmsimde.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=./2022-Fall-Reorganize-cmsimde.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="./tag/2022fallcp.html">2022FallCP</a>                </aside>
+
+                <div class="clear"></div>
+
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <a class="post-nav-prev" href="./2022-Fall-Intro-to-computer-programming.html">
+                        <section class="post-nav-teaser">
+                            <i class="ic ic-arrow-right"></i>
+                                <h2 class="post-nav-title">2022 Fall CP 課程</h2>
+                            <p class="post-nav-excerpt">2022 Fall 計算機程式開場</p>
+                        </section>
+                    </a>
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
       <!-- TODO : Body class -->
     <div id="body-class" style="display: none;" class=""></div>
 

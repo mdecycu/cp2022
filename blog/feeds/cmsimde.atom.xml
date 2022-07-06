@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>2022Fall 計算機程式 - cmsimde</title><link href="./" rel="alternate"></link><link href="./feeds/cmsimde.atom.xml" rel="self"></link><id>./</id><updated>2022-07-05T12:50:56+08:00</updated><entry><title>2022 Fall 重整 cmsimde</title><link href="./2022-Fall-Reorganize-cmsimde.html" rel="alternate"></link><published>2022-07-05T11:00:00+08:00</published><updated>2022-07-05T12:50:56+08:00</updated><author><name>mdecycu</name></author><id>tag:None,2022-07-05:./2022-Fall-Reorganize-cmsimde.html</id><summary type="html">&lt;p&gt;cmsimde 的頁面一直是利用 Python, 以 Flask 架構直接寫出網頁內容.&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;cmsimde 的頁面一直是利用 Python, 以 Flask 架構直接寫出網頁內容.&lt;/p&gt;
+
+
+&lt;p&gt;直接用程式寫出 html 通常是在開發階段, 需要驗證全球資訊網站前後端流程結合正確無誤時採用. 也就是所編寫的全球資訊網動態後端的程式, 能夠產生全端所需要的網站內容, 但壞處顯而易見: 網頁的 layout 修改都必須直接進入 server 端處理.&lt;/p&gt;
+&lt;p&gt;更好的方式, 是採用 Template, 而且是在 Bootstrap 架構下的 Template. 因為目前 cmsimde 採用 Bootstrap 4, 因此考慮採用 &lt;a href="https://github.com/hfilimonescu/flask-bs4"&gt;https://github.com/hfilimonescu/flask-bs4&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;在處理 cmsimde 採用 Flask Template + Bootstrap 議題時, 除了 Python 語法, Flask 架構, 還需要了解如何處理 Bootstrap　中的 html 與 css 程式. 因此這是一個中階的全球資訊網站計算機程式專案.&lt;/p&gt;
+&lt;h2&gt;Bootstrap&lt;/h2&gt;
+&lt;pre class="brush:html"&gt;
+&lt;div class="container-fluid"&gt;
+    &lt;div class="row"&gt;
+        &lt;div class="col-md-12"&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="row"&gt;
+        &lt;div class="col-md-6"&gt;
+        &lt;/div&gt;
+        &lt;div class="col-md-6"&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="row"&gt;
+        &lt;div class="col-md-8"&gt;
+        &lt;/div&gt;
+        &lt;div class="col-md-4"&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="row"&gt;
+        &lt;div class="col-md-4"&gt;
+        &lt;/div&gt;
+        &lt;div class="col-md-4"&gt;
+        &lt;/div&gt;
+        &lt;div class="col-md-4"&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/hfilimonescu/flask-bs4"&gt;https://github.com/hfilimonescu/flask-bs4&lt;/a&gt;
+&lt;a href="https://www.layoutit.com/build"&gt;https://www.layoutit.com/build&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;Flask&lt;/h2&gt;
+&lt;h2&gt;Template&lt;/h2&gt;
+&lt;h2&gt;cmsimde&lt;/h2&gt;
+&lt;h2&gt;Flask-bs4&lt;/h2&gt;</content><category term="cmsimde"></category><category term="2022FallCP"></category></entry></feed>
