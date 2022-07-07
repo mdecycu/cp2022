@@ -2,7 +2,7 @@
         <head>
         <title>cp2022</title>
         <meta charset="utf-8">
-<meta property="head" content="H3">
+<meta property="head" content="H2">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900" rel="stylesheet">
         <link rel="stylesheet" href="./../cmsimde/static/chimper/fonts/icomoon/style.css">
@@ -141,98 +141,75 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">Python for INV << <a href='Python for INV.html'>Previous</a> <a href='CAE.html'>Next</a> >> CAE<br /><h1>Python for NX</h1>
-<p>針對 HW1 使用 NX12.0.2 教育版繪零件圖者, 可以利用下列 Python 程式修改零件參數, 取零件影像圖並計算零件體積:</p>
-<p>參考零件: <a href="http://wcm.cycu.org:88/github/cad2020/downloads/nx12/journal/block.prt">block.prt</a></p>
-<p><a href="https://docs.plm.automation.siemens.com/data_services/resources/nx/12/nx_api/custom/en_US/nxopen_python_ref/index.html">NX12 NXOpen Python API Reference</a></p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># nx_open_part.py
-# 導入 NXOpen
-import NXOpen
-import NXOpen.UF
-import NXOpen.Gateway
-   
-def main():
-    # 取得目前開啟的工作階段
-    theSession = NXOpen.Session.GetSession()
-    theUfSession = NXOpen.UF.UFSession.GetUFSession()
-      
-    # 建立 ListingWindow
-    listWin= theSession.ListingWindow
-    # 開啟零件檔案
-    basePart1 = theSession.Parts.OpenBaseDisplay("c:/tmp/block.prt")
-    workPart = theSession.Parts.Work
-    unit1 = workPart.UnitCollection.FindObject("MilliMeter")
-    # height
-    p7 = workPart.Expressions.FindObject("p7")
-    # width
-    p8 = workPart.Expressions.FindObject("p8")
-    # length
-    p9 = workPart.Expressions.FindObject("p9")
-    workPart.Expressions.EditWithUnits(p7, unit1, "30")
-    workPart.Expressions.EditWithUnits(p8, unit1, "60")
-    workPart.Expressions.EditWithUnits(p9, unit1, "90")
-    theSession.UpdateManager.DoUpdate(0)
-    #saveStatus1 = workPart.SaveAs("c:/tmp/block_new.prt")
-    #saveStatus1.Dispose()
-    # initialize list to hold bodies
-    theBodyTags = []
-   
-    for x in workPart.Bodies:
-        if x.IsSolidBody:
-            theBodyTags.append(x.Tag)
-      
-    # 準備輸出 ASCII 格式 STL 零件檔案
-    sTLCreator1 = theSession.DexManager.CreateStlCreator()
-    sTLCreator1.AutoNormalGen = True
-    sTLCreator1.ChordalTol = 0.08
-    sTLCreator1.AdjacencyTol = 0.08
-    sTLCreator1.OutputFile = "C:\\tmp\\block_ascii.stl"
-    # Binary STL: NXOpen.STLCreatorOutputTypeEnum.Binary
-    sTLCreator1.OutputType = NXOpen.STLCreatorOutputTypeEnum.Text
-    # 已知 body1 命名
-    body1 = workPart.Bodies.FindObject("EXTRUDE(2)")
-    added1 = sTLCreator1.ExportSelectionBlock.Add(body1)
-    nXObject1 = sTLCreator1.Commit()
-    sTLCreator1.Destroy()
-  
-    # 開啟所建立的 ListingWindow
-    listWin.Open()
-    listWin.WriteLine("number of solid bodies: " + str(len(theBodyTags)))
-   
-    (massProps, Stats) = theUfSession.Modeling.AskMassProps3d(theBodyTags, len(theBodyTags), 1, 4, .03, 1, [0.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0])
-    listWin.WriteLine("units: kg, mm")
-    listWin.WriteLine("surface area: " + str(massProps[0]))
-    listWin.WriteLine("volume: " + str(massProps[1]*1E9))
-    # 在 ListingWindow 中寫入字串
-    listWin.WriteLine("Hello, NXOpen")
-    listWin.Close()
+    <div id="tipue_search_content">CPython << <a href='CPython.html'>Previous</a> <a href='CAD.html'>Next</a> >> CAD<br /><h1>PDF</h1>
+<h4>從單機程式到全球資訊網服務:</h4>
+<p><a href="https://link.springer.com/book/10.1007/978-1-4842-7107-0">Essential Computer Science</a> 是 2021 年出版的電子書, 在校園裡可以直接下載 pdf 檔案, 以下 CPython 程式套用 <a href="https://pypi.org/project/PyPDF2/">PyPDF2</a> 模組, 可以分割或合併 pdf 檔案.</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># pip install PyPDF2
+from PyPDF2 import PdfFileWriter, PdfFileReader
+import os
+
+def SplitPdf(pdfFileName, newFileName, fromPage, toPage):
+
+    """Action to split user uploaded files
+    """
+
+    pdfReader = PdfFileReader(open(pdfFileName, "rb"))
+    information = [(newFileName, fromPage, toPage)]
+    pdf_writer = PdfFileWriter()
+    pdf_writer.addPage(pdfReader.getPage(1))
+    for i in range(13, 18):
+        pdf_writer.addPage(pdfReader.getPage(i))
+    
+    for page in range(len(information)):
+        start = information[page][1]
+        end = information[page][2]
+        while start&lt;=end:
+            pdf_writer.addPage(pdfReader.getPage(start-1))
+            start+=1
+        if not os.path.exists("./"):
+            os.makedirs(savepath)
+        output_filename = '{}_{}_page_{}.pdf'.format(information[page][0], information[page][1], information[page][2])
+        with open(output_filename,'wb') as out:
+            pdf_writer.write(out)
+
+    outstring = "已經將 " + pdfFileName + " 中的第 " + str(fromPage) + " 到第 " + str(toPage) + "頁, 存為 " + output_filename
+
+    return outstring
+
+def CombinePdf(pdfFileNames, newFileName):
+
+    """Action to split user uploaded files
+    """
+    
+    # pdfFileNames is []
+    pdf_write_object = PdfFileWriter()
+
+    filenameString = ""
+    
+    for filename in pdfFileNames:
+        pdf_read_object = PdfFileReader(open(filename, "rb"))
+        filenameString += filename + ", "
+        for page in range(pdf_read_object.numPages):
+            pdf_write_object.addPage(pdf_read_object.getPage(page))
      
-    # 將零件檔案 fit 之後, export 出 png 檔案
-    theUI = NXOpen.UI.GetUI()
-    imageExportBuilder1 = theUI.CreateImageExportBuilder()
+    final_file_object = open(newFileName + ".pdf", 'wb')
+    pdf_write_object.write(final_file_object)
+    final_file_object.close()
+
+    outstring = "已經將 " + filenameString+ " 合併為: "+ newFileName + ".pdf"
+
+    return outstring
  
-    custombackgroundcolor1 = [None] * 3
-    custombackgroundcolor1[0] = 1.0
-    custombackgroundcolor1[1] = 1.0
-    custombackgroundcolor1[2] = 1.0
- 
-    imageExportBuilder1.SetCustomBackgroundColor(custombackgroundcolor1)
-    imageExportBuilder1.FileFormat = NXOpen.Gateway.ImageExportBuilder.FileFormats.Png
-    imageExportBuilder1.FileName = "c:\\tmp\\block.png"
- 
-    imageExportBuilder1.BackgroundOption = NXOpen.Gateway.ImageExportBuilder.BackgroundOptions.Original
- 
-    imageExportBuilder1.EnhanceEdges = False
-    imageExportBuilder1.RegionMode = False
-    # fit view 後 commit export png
-    workPart.ModelingViews.WorkView.Fit()
-    nXObject6 = imageExportBuilder1.Commit()
- 
-    imageExportBuilder1.Destroy()
-      
-if __name__ == "__main__":
-    main()</pre>
-<p></p><br />Python for INV << <a href='Python for INV.html'>Previous</a> <a href='CAE.html'>Next</a> >> CAE</div>
+pdfFileName = "2021_Book_EssentialComputerScience.pdf"
+newFileName = "cp2022_textbook_part1.pdf"
+fromPage = 21
+toPage = 98
+SplitPdf(pdfFileName, newFileName, fromPage, toPage)
+print("done")</pre>
+<p>上列程式只能在單機執行, 假如再套用 <a href="https://flask.palletsprojects.com/en/2.1.x/">Flask</a> 全球資訊網框架. 就可以將單機程式配置在 server 上, 讓參與協同產品設計的成員可以在任何地方透過瀏覽器使用分割與合併 pdf 檔案的功能.</p>
+<p><a href="https://gmnfuedutw-my.sharepoint.com/:u:/g/personal/yen_gm_nfu_edu_tw/EXUaz5TU5bZNsrnxUfA-CZwBvsngVpA7S4ikP9J7ueb6nw?e=i3QMBN">cp2022_CPython_pypdf2_Flask_project1.7z</a> (for cp2022 users only)</p>
+<p></p>
+<p></p><br />CPython << <a href='CPython.html'>Previous</a> <a href='CAD.html'>Next</a> >> CAD</div>
         
     <!-- footer -->
       <div class="container">

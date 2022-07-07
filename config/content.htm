@@ -1,7 +1,27 @@
 <h1>About</h1>
 <h4>2022 Fall</h4>
 <p>Introduction to Computer Programming (計算機程式)</p>
-<p><a href="https://www.youtube.com/c/Freecodecamp/search?query=python">https://www.youtube.com/c/Freecodecamp/search?query=python</a></p><h1>Brython</h1>
+<p><a href="https://www.youtube.com/c/Freecodecamp/search?query=python">https://www.youtube.com/c/Freecodecamp/search?query=python</a></p>
+<h1>ANSIC</h1>
+<p><a href="https://link.springer.com/book/10.1007/978-3-030-50750-3">Computer Programming in C for Beginners</a> (2020)</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">// Our first program
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+int main()
+{
+    printf("Hello world!\n");
+    return 0;
+}</pre>
+<p><a href="https://gmnfuedutw-my.sharepoint.com/:u:/g/personal/yen_gm_nfu_edu_tw/EXxz57GzrnBKmnniJvffmoABCDC_cUCbqlTa4cx29dC_UA?e=iCaVgk">cp2022_ANSIC_w_tinyc_scite.7z</a> (for cp2022 users only)</p>
+<p>利用 <a href="https://en.wikipedia.org/wiki/Differential_evolution">Differential Evoluation</a> (差分進化演算法), 以 <a href="https://en.wikipedia.org/wiki/ANSI_C">ANSI C</a> 程式語言編寫適應方程式的最大化或最小化演算:</p>
+<p style="padding-left: 30px;"><a href="/downloads/volume_in_de_ex1.c">volume_in_de_ex1.c</a></p>
+<p style="padding-left: 30px;"><a href="https://gist.github.com/mdecourse/b5df54ab3d5f2f079f785541d1178a66">其他範例程式</a></p>
+<p style="padding-left: 30px;">相同演算法, 以 CPython 解題:</p>
+<p style="padding-left: 60px;"><a href="/downloads/volume_in_de_ex1.py">volume_in_de_ex1.py</a></p>
+<p style="padding-left: 30px;">相同演算法, <a href="https://mde.tw/cp2022/content/Brython.html?src=https://gist.githubusercontent.com/mdecourse/b5df54ab3d5f2f079f785541d1178a66/raw/ccdea7b056702bcf06ed24c7407a43e0a1aacdbc/volume_in_de_ex1.py">以 Brython 解題</a>.</p>
+<p style="padding-left: 30px;">此一採<a href="https://www.analyzemath.com/calculus/Problems/maximum_volume_problem.html">固定表面積的紙盒體積最大化</a>運算範例, <a href="/downloads/volume_in_de_ex1.py">volume_in_de_ex1.py</a> 的原始作者為<a href="https://hdl.handle.net/11296/tur9hu">李孟恭</a> (<a href="https://github.com/kmollee/algorithm/blob/master/de.py">https://github.com/kmollee/algorithm/blob/master/de.py</a>)</p>
+<p>從 <a href="https://github.com/Akagi201/lw_oopc/blob/master/doc/%E8%BD%BB%E9%87%8F%E7%BA%A7%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1C%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B%E6%A1%86%E6%9E%B6%E4%BB%8B%E7%BB%8D.md">lw-oopc 的簡介</a> 以及<a href="https://github.com/Akagi201/lw_oopc">升級版 lw-oopc 原始碼</a>中, 則可以進一步對 ANSI C 在嵌入式 (embedded) 系統上的應用有所了解.</p>
+<p style="padding-left: 60px;"></p><h1>Brython</h1>
 <p><a href="https://en.wikipedia.org/wiki/Flag_of_the_Republic_of_China#Construction_details">ROC 國旗規格</a> <a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%9B%BD%E6%97%97#%E8%A7%84%E6%A0%BC">PROC 國旗規格</a> <a href="https://en.wikipedia.org/wiki/Flag_of_the_United_States#Specifications">USA 國旗規格</a></p>
 <p><a href="https://gist.github.com/mdecourse/05930b1775b77293523b59b1bbb43e57">Gist Brython scripts</a></p>
 <p><a href="https://www.arc.id.au/CanvasGraphics.html">Cango</a></p>
@@ -450,7 +470,8 @@ doc["auto_tetris"].bind("click", auto_tetris.do)
 ################################## auto tetris end
 </script>
 </p>
-<h1>CPython</h1>
+<h2>Game</h2>
+<p><a href="https://link.springer.com/book/10.1007/978-1-4302-5801-8">Advanced Game Design with HTML5 and JavaScript</a> (2015)</p><h1>CPython</h1>
 <p>比對兩份資料, 列出差異:</p>
 <p style="padding-left: 30px;">數列應用</p>
 <p style="padding-left: 30px;">for 重複迴圈</p>
@@ -524,13 +545,81 @@ for i in stud_name_list:
     except:
         print(i, "no data")
 </pre>
+<p></p><h2>PDF</h2>
+<h4>從單機程式到全球資訊網服務:</h4>
+<p><a href="https://link.springer.com/book/10.1007/978-1-4842-7107-0">Essential Computer Science</a> 是 2021 年出版的電子書, 在校園裡可以直接下載 pdf 檔案, 以下 CPython 程式套用 <a href="https://pypi.org/project/PyPDF2/">PyPDF2</a> 模組, 可以分割或合併 pdf 檔案.</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># pip install PyPDF2
+from PyPDF2 import PdfFileWriter, PdfFileReader
+import os
+
+def SplitPdf(pdfFileName, newFileName, fromPage, toPage):
+
+    """Action to split user uploaded files
+    """
+
+    pdfReader = PdfFileReader(open(pdfFileName, "rb"))
+    information = [(newFileName, fromPage, toPage)]
+    pdf_writer = PdfFileWriter()
+    pdf_writer.addPage(pdfReader.getPage(1))
+    for i in range(13, 18):
+        pdf_writer.addPage(pdfReader.getPage(i))
+    
+    for page in range(len(information)):
+        start = information[page][1]
+        end = information[page][2]
+        while start&lt;=end:
+            pdf_writer.addPage(pdfReader.getPage(start-1))
+            start+=1
+        if not os.path.exists("./"):
+            os.makedirs(savepath)
+        output_filename = '{}_{}_page_{}.pdf'.format(information[page][0], information[page][1], information[page][2])
+        with open(output_filename,'wb') as out:
+            pdf_writer.write(out)
+
+    outstring = "已經將 " + pdfFileName + " 中的第 " + str(fromPage) + " 到第 " + str(toPage) + "頁, 存為 " + output_filename
+
+    return outstring
+
+def CombinePdf(pdfFileNames, newFileName):
+
+    """Action to split user uploaded files
+    """
+    
+    # pdfFileNames is []
+    pdf_write_object = PdfFileWriter()
+
+    filenameString = ""
+    
+    for filename in pdfFileNames:
+        pdf_read_object = PdfFileReader(open(filename, "rb"))
+        filenameString += filename + ", "
+        for page in range(pdf_read_object.numPages):
+            pdf_write_object.addPage(pdf_read_object.getPage(page))
+     
+    final_file_object = open(newFileName + ".pdf", 'wb')
+    pdf_write_object.write(final_file_object)
+    final_file_object.close()
+
+    outstring = "已經將 " + filenameString+ " 合併為: "+ newFileName + ".pdf"
+
+    return outstring
+ 
+pdfFileName = "2021_Book_EssentialComputerScience.pdf"
+newFileName = "cp2022_textbook_part1.pdf"
+fromPage = 21
+toPage = 98
+SplitPdf(pdfFileName, newFileName, fromPage, toPage)
+print("done")</pre>
+<p>上列程式只能在單機執行, 假如再套用 <a href="https://flask.palletsprojects.com/en/2.1.x/">Flask</a> 全球資訊網框架. 就可以將單機程式配置在 server 上, 讓參與協同產品設計的成員可以在任何地方透過瀏覽器使用分割與合併 pdf 檔案的功能.</p>
+<p><a href="https://gmnfuedutw-my.sharepoint.com/:u:/g/personal/yen_gm_nfu_edu_tw/EXUaz5TU5bZNsrnxUfA-CZwBvsngVpA7S4ikP9J7ueb6nw?e=i3QMBN">cp2022_CPython_pypdf2_Flask_project1.7z</a> (for cp2022 users only)</p>
+<p></p>
 <p></p><h2>CAD</h2>
-<p>SolidWorks: <a href="https://www.solidworks.com/">https://www.solidworks.com/</a> </p>
-<p>AutoDesk Inventor: <a href="https://www.autodesk.com/products/inventor">https://www.autodesk.com/products/inventor</a> </p>
-<p>Siemens NX: <a href="https://www.plm.automation.siemens.com/global/en/products/nx/">https://www.plm.automation.siemens.com/global/en/products/nx/</a> </p>
-<p>PTC Onshape: <a href="https://www.ptc.com/en/products/onshape">https://www.ptc.com/en/products/onshape</a> </p>
-<p>Solvespace: <a href="https://solvespace.com">https://solvespace.com</a> </p>
-<p style="padding-left: 30px;"><a href="https://github.com/solvespace/solvespace">https://github.com/solvespace/solvespace</a> </p><h3>Python for SW</h3>
+<p>SolidWorks: <a href="https://www.solidworks.com/">https://www.solidworks.com/</a></p>
+<p>AutoDesk Inventor: <a href="https://www.autodesk.com/products/inventor">https://www.autodesk.com/products/inventor</a></p>
+<p>Siemens NX: <a href="https://www.plm.automation.siemens.com/global/en/products/nx/">https://www.plm.automation.siemens.com/global/en/products/nx/</a></p>
+<p>PTC Onshape: <a href="https://www.ptc.com/en/products/onshape">https://www.ptc.com/en/products/onshape</a></p>
+<p>Solvespace: <a href="https://solvespace.com">https://solvespace.com</a></p>
+<p style="padding-left: 30px;"><a href="https://github.com/solvespace/solvespace">https://github.com/solvespace/solvespace</a></p><h3>Python for SW</h3>
 <p><a href="http://wcm.cycu.org:88/github/cad2020/content/HW1_SW.html">http://wcm.cycu.org:88/github/cad2020/content/HW1_SW.html</a> </p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import pythoncom
 import win32com.client
@@ -996,7 +1085,9 @@ var winkVideoData2 = {
 <p style="padding-left: 30px;"><a href="https://www.techwithtim.net/tutorials/flask/adding-bootstrap/">https://www.techwithtim.net/tutorials/flask/adding-bootstrap/</a></p>
 <p style="padding-left: 30px;"><a href="https://pythonhosted.org/Flask-Bootstrap/basic-usage.html">https://pythonhosted.org/Flask-Bootstrap/basic-usage.html</a></p>
 <p style="padding-left: 30px;"><a href="https://github.com/MashSoftware/flask-bootstrap-ui">https://github.com/MashSoftware/flask-bootstrap-ui</a></p>
-<p style="padding-left: 30px;"><a href="https://github.com/hfilimonescu/flask-bs4">https://github.com/hfilimonescu/flask-bs4</a> </p><h1>VSCode</h1>
+<p style="padding-left: 30px;"><a href="https://github.com/hfilimonescu/flask-bs4">https://github.com/hfilimonescu/flask-bs4</a></p>
+<h2>Bugs</h2>
+<p>靜態網頁在 Brython 頁面無法執行關鍵字搜尋.</p><h1>VSCode</h1>
 <h4>EBooks:</h4>
 <p style="padding-left: 30px;"><a href="https://link.springer.com/book/10.1007/978-1-4842-6901-5">Visual Studio Code Distilled </a></p>
 <p style="padding-left: 30px;"><a href="https://link.springer.com/book/10.1007/978-1-4842-7344-9">Optimizing Visual Studio Code for Python Development </a></p>

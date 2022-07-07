@@ -155,6 +155,9 @@ Flask
 Template
 ----
 
+&lt;https://github.com/zzzeek/mako&gt;
+&lt;https://docs.makotemplates.org/en/latest/&gt;
+
 cmsimde
 ----
 
@@ -234,11 +237,15 @@ server {
     ssl_protocols    TLSv1 TLSv1.1 TLSv1.2;
     ssl_ciphers    HIGH:!aNULL:!MD5;
 
-location ~ \.php$ {
-    fastcgi_pass   127.0.0.1:9123;
-    fastcgi_index  index.php;
-    fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
-    include        fastcgi_params;
+    location /{ 
+        index index.html index.php;
+    }
+
+    location ~ \.php$ {
+        fastcgi_pass   127.0.0.1:9123;
+        fastcgi_index  index.php;
+        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+        include        fastcgi_params;
     }
 }
 &lt;/pre&gt;
@@ -338,7 +345,27 @@ function F_session_destroy($key)
     // for PHP 8.1 Yen
     return true;
 }
-&lt;/pre&gt;</t>
+&lt;/pre&gt;
+
+configuration
+
+\tcexam\shared\config
+
+Letsencrypt
+
+stop nginx
+
+certbot certonly --standalone
+
+TCExam
+
+Modules 模組
+
+Topics 主題
+
+Questions 題目
+
+Answers</t>
 <t tx="yen.20170108171605.1"></t>
 <t tx="yen.20170108171605.2">QTreeWidget {
     /* These apply to the selected item, but not to editing items.*/
