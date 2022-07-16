@@ -207,6 +207,10 @@ sudo apt upgrade
 sudo apt autoremove
 &lt;/pre&gt;
 
+&lt;https://computingforgeeks.com/install-nginx-with-php-fpm-on-ubuntu-linux/&gt;
+
+&lt;https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-22-04&gt;
+
 接下來希望以最小安裝放入桌面, 可以執行
 
 sudo apt install --no-install-recommends ubuntu-desktop
@@ -380,7 +384,7 @@ allow 2001:288:6004:xx::0/32;
 
 deny all;
 
-admin/code/tce_pdf_results.php
+admin/code/tce_pdf_testgen.php
 
 line 586 加入 ?? '': if ($mq['question_type'] ?? '' == 4) {
 
@@ -398,6 +402,27 @@ $font = TCPDF_FONTS::addTTFfont('TaipeiSansTC.ttf');
 轉換時, 將 .ttf 字型檔案與 convert.php 放在 C:\tmp\tcexam\fonts, 執行前要先建立 C:\tmp\tcexam\shared\tcpdf\fonts 目錄, 轉換後的 .php, .z 與 .ctg.z 檔案, 會存入 C:\tmp\tcexam\shared\tcpdf\fonts 中, 字形設定檔案位於 C:\tmp\tcexam\shared\config\tce_pdf.php.
 
 設定 Test 時, 若只允許特定 IPv6 網段才可參加測試, 則可使用 2001:288:6004:xx:: 作為 IP 網段設定 (Authorized IP's 欄位).
+
+ATTENTION: [8192] strlen(): Passing null to parameter #1 ($string) of type string is deprecated | LINE: 66 | FILE: C:\tmp\tcexam\shared\code\tce_functions_test.php
+
+
+66 行改為:
+
+ if (strlen($m['test_password'] ?? '') &gt; 0) {
+ 
+ allow all ips 直接修改程式碼:
+ 
+ shared/code/tce_functions_test.php line 203:
+ 
+ function F_isValidIP($user_ip, $test_ips)
+{
+    // Yen allow all ip
+    return true;
+
+sudo -u postgres psql
+ALTER USER tcexam PASSWORD 'tcexam';\q
+
+https://linuxhint.com/install-latest-php-ubuntu22-04/
 
 Virtualbox
 ----
